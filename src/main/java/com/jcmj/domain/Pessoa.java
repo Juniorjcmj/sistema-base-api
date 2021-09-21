@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.annotation.Generated;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -39,7 +38,7 @@ public abstract class Pessoa implements Serializable{
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer>perfis = new HashSet<>();
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate dataCricacao = LocalDate.now();
+	protected LocalDate dataCriacao = LocalDate.now();
 	
 	public Pessoa() {
 		super();
@@ -104,12 +103,12 @@ public abstract class Pessoa implements Serializable{
 		this.perfis.add(perfil.getCodigo());
 	}
 
-	public LocalDate getDataCricacao() {
-		return dataCricacao;
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setDataCricacao(LocalDate dataCricacao) {
-		this.dataCricacao = dataCricacao;
+	public void setDataCriacao(LocalDate dataCricacao) {
+		this.dataCriacao = dataCricacao;
 	}
 
 	@Override
@@ -117,7 +116,7 @@ public abstract class Pessoa implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((dataCricacao == null) ? 0 : dataCricacao.hashCode());
+		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -140,10 +139,10 @@ public abstract class Pessoa implements Serializable{
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (dataCricacao == null) {
-			if (other.dataCricacao != null)
+		if (dataCriacao == null) {
+			if (other.dataCriacao != null)
 				return false;
-		} else if (!dataCricacao.equals(other.dataCricacao))
+		} else if (!dataCriacao.equals(other.dataCriacao))
 			return false;
 		if (email == null) {
 			if (other.email != null)
