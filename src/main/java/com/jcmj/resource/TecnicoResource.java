@@ -20,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jcmj.domain.Tecnico;
 import com.jcmj.domain.dto.TecnicoDTO;
-import com.jcmj.domain.enus.Status;
 import com.jcmj.service.TecnicoService;
 
 @RestController
