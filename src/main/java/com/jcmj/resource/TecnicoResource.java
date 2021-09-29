@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jcmj.domain.Tecnico;
 import com.jcmj.domain.dto.TecnicoDTO;
+import com.jcmj.domain.enus.Status;
 import com.jcmj.service.TecnicoService;
 
 @RestController
@@ -55,5 +57,14 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(new TecnicoDTO(oldObj));
 		
 	}
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id){
+		tecnicoService.delete(id);
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	
+	
 
 }
