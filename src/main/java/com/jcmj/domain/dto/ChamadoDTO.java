@@ -3,10 +3,12 @@ package com.jcmj.domain.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jcmj.domain.Chamado;
 
-public class ChamdoDTO  implements Serializable{
+public class ChamadoDTO  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
@@ -14,22 +16,28 @@ public class ChamdoDTO  implements Serializable{
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;	
+	@NotNull(message = "o campo PRIORIDADE é requerido!")
 	private Integer prioridade;
+	@NotNull(message = "o campo STATUS é requerido!")
 	private Integer status;	
+	@NotNull(message = "o campo TITULO é requerido!")
 	private String titulo;
+	@NotNull(message = "o campo OBSERVAÇÃO é requerido!")
 	private String observacao;	
+	@NotNull(message = "o campo TÉCNICO é requerido!")
 	private Integer tecnico;	
+	@NotNull(message = "o campo CLIENTE é requerido!")
 	private Integer cliente;
 	private String nomeCliente;
 	private String nomeTecnico;
 	
 	
-	public ChamdoDTO() {
+	public ChamadoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ChamdoDTO(Chamado obj) {
+	public ChamadoDTO(Chamado obj) {
 		super();
 		this.id = obj.getId();
 		this.dataAbertura = obj.getDataAbertura();
