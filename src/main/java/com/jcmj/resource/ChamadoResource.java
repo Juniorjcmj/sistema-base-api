@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jcmj.domain.Chamado;
+import com.jcmj.domain.dto.ChamdoDTO;
 import com.jcmj.service.ChamadoService;
 
 @RestController
@@ -18,9 +19,9 @@ public class ChamadoResource {
 	private ChamadoService chamadoService;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Chamado> findById(@PathVariable Integer id){
+	public ResponseEntity<ChamdoDTO> findById(@PathVariable Integer id){
 		Chamado c =  chamadoService.findById(id);
-		return ResponseEntity.ok().body(c);
+		return ResponseEntity.ok().body(new ChamdoDTO(c));
 		
 	}
 

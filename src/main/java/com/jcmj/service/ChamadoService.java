@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jcmj.domain.Chamado;
 import com.jcmj.repository.ChamadoRepository;
+import com.jcmj.service.exception.ObjectnotFoundException;
 
 @Service
 public class ChamadoService {
@@ -16,7 +17,7 @@ public class ChamadoService {
 	
 	public Chamado findById(Integer id) {
 		Optional<Chamado> obj = chamadoRepository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(()-> new ObjectnotFoundException("Chamado não encontrado!" + id));
 	}
 
 }
