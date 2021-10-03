@@ -3,6 +3,7 @@ package com.jcmj.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jcmj.domain.Chamado;
@@ -24,12 +25,17 @@ public class DBService {
 	@Autowired
 	private ChamadoRepository chamadoRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	
+	
 	public void instanciaDB() {
 		
-		Tecnico tec1 = new Tecnico(null, "Sergio Barbosa", "716.417.840-24", "sergio@mail.com", "sergio@2020");
+		Tecnico tec1 = new Tecnico(null, "Sergio Barbosa", "716.417.840-24", "sergio@mail.com", encoder.encode("123"));
 		tec1.addPerfis(Perfil.ADMIN);	
 		
-		Cliente cli1 = new Cliente(null, "Linux Trovald", "559.406.800-70", "linux@mail.com", "linux@2020");		
+		Cliente cli1 = new Cliente(null, "Linux Trovald", "559.406.800-70", "linux@mail.com", encoder.encode("123"));		
 		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "Primeiro Chamado", tec1, cli1);		
 		
