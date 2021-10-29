@@ -48,7 +48,9 @@ public class ClienteService {
 		objDto.setId(id);
 		Cliente oldObj = findById(id);
 		validaPorCpfEEmail(objDto);
-		objDto.setSenha(encoder.encode(objDto.getSenha()));
+		if(objDto.getSenha().equals(oldObj.getSenha())) {
+			objDto.setSenha(encoder.encode(objDto.getSenha()));
+		}
 		oldObj = new Cliente(objDto);
 		
 		return  repository.save(oldObj);

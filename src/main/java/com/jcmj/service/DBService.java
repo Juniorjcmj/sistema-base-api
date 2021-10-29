@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.jcmj.domain.Chamado;
 import com.jcmj.domain.Cliente;
+import com.jcmj.domain.Empresa;
 import com.jcmj.domain.Tecnico;
 import com.jcmj.domain.enus.Perfil;
 import com.jcmj.domain.enus.Prioridade;
 import com.jcmj.domain.enus.Status;
 import com.jcmj.repository.ChamadoRepository;
-import com.jcmj.repository.ClienteRepository;
+import com.jcmj.repository.EmpresaRepository;
 import com.jcmj.repository.PessoaRepository;
-import com.jcmj.repository.TecnicoRepository;
 
 @Service
 public class DBService {
@@ -25,7 +25,9 @@ public class DBService {
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-
+	@Autowired
+	EmpresaRepository empresaRepository;
+	
 	public void instanciaDB() {
 
 		Tecnico tec1 = new Tecnico(null, "Valdir Cezar", "550.482.150-95", "valdir@mail.com", encoder.encode("123"));
@@ -47,9 +49,17 @@ public class DBService {
 		Chamado c4 = new Chamado(null, Prioridade.ALTA, Status.ABERTO, "Chamado 4", "Teste chamado 4", tec3, cli3);
 		Chamado c5 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 5", "Teste chamado 5", tec2, cli1);
 		Chamado c6 = new Chamado(null, Prioridade.BAIXA, Status.ENCERRADO, "Chamado 7", "Teste chamado 6", tec1, cli5);
-
+        
+		
+		Empresa e1 = new Empresa(null,"Casa Nobre", "05524387740","Barra da Tijuca"
+				                ,"(21)99752-6570","(21)99752-6570","casa@mail.com" );
+		Empresa e2 = new Empresa(null,"Cliníca EOBR", "05524387740","Barra da Tijuca"
+                ,"(21)99752-6570","(21)99752-6570","casa@mail.com" );	
+		
 		pessoaRepository.saveAll(Arrays.asList(tec1, tec2, tec3, tec4, tec5, cli1, cli2, cli3, cli4, cli5));
-		chamadoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
+		chamadoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));		
+		
+		empresaRepository.saveAll(Arrays.asList(e1,e2));
 	}
 
 }
