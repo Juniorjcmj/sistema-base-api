@@ -32,6 +32,7 @@ public class ContasPagarResource {
 	
 	@PostMapping
 	public ResponseEntity<ContasPagarDTO> create(@Valid @RequestBody ContasPagarDTO objDto){
+		
 		List<ContasPagar> contasSalvas = service.insertComParcelas(objDto);
 		URI uri =  ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
@@ -49,10 +50,10 @@ public class ContasPagarResource {
 		return ResponseEntity.created(uri).build();
 	}
 	@GetMapping
-	public ResponseEntity<List<ContasPagarDTO>> findAll(){		
+	public ResponseEntity<List<ContasPagar>> findAll(){		
 		List<ContasPagar> list = service.findAll();
 		List<ContasPagarDTO> result = list.stream().map(obj -> new ContasPagarDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(result);
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")

@@ -74,6 +74,10 @@ public interface ContasPagarRepository extends JpaRepository<ContasPagar, Intege
 				String situacao);
 	    @Query(value="SELECT * FROM contas_pagar c WHERE c.fornecedor LIKE %?1%   AND c.data_vencimento BETWEEN ?2 AND ?3 order by c.data_pagamento, c.data_vencimento ASC   ", nativeQuery=true)
 	    List<ContasPagar> findAllFornecedorPeriodo(String fornecedor, Date dataInicial, Date dataFinal);
+	    @Query(value="SELECT * FROM contas_pagar c WHERE c.classificacao_despesa_id = ?1 ", nativeQuery=true)
+	    List<ContasPagar> finAllClassificacaoDespesa(Integer id);
+	    @Query(value="SELECT * FROM contas_pagar c WHERE c.sub_classificacao_despesa_id = ?1 ", nativeQuery=true)
+	    List<ContasPagar> finAllSubClassificacaoDespesa(Integer id);
 
 
 }

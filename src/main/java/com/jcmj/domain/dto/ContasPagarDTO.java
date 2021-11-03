@@ -118,6 +118,7 @@ public class ContasPagarDTO  implements Serializable{
 		this.valorDuplicata = valorDuplicata;
 	}
 	public BigDecimal getJurosMulta() {
+		this.jurosMulta = this.jurosMulta != null ? this.jurosMulta : BigDecimal.ZERO ;
 		return jurosMulta;
 	}
 	public void setJurosMulta(BigDecimal jurosMulta) {
@@ -130,6 +131,7 @@ public class ContasPagarDTO  implements Serializable{
 		this.valorPago = valorPago;
 	}
 	public BigDecimal getDesconto() {
+		this.desconto = this.desconto != null ? this.desconto : BigDecimal.ZERO ;
 		return desconto;
 	}
 	public void setDesconto(BigDecimal desconto) {

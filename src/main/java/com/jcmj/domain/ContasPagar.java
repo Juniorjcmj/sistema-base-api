@@ -94,10 +94,20 @@ public class ContasPagar implements Serializable {
     @OneToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+    
     @NotNull(message = "N/D  é obrigatório.")
     private String nd;
 
     private String parcela;
+    
+   
+    @OneToOne
+    @JoinColumn(name = "classificacao_despesa_id")
+    private ClassificacaoDespesa classificacaoDespesa;
+    
+    @OneToOne
+    @JoinColumn(name = "sub_classificacao_despesa_id")
+    private SubClassificacaoDespesa subClassificacaoDespesa;
 
     public ContasPagar(){ }
 
@@ -242,7 +252,8 @@ public class ContasPagar implements Serializable {
     }
 
     public StatusPagamento getStatusPagamento() {
-        return this.statusPagamento;
+    	
+        return this.statusPagamento != null ? this.statusPagamento : StatusPagamento.PENDENTE;
     }
 
     public void setStatusPagamento(StatusPagamento situacao) {
@@ -275,12 +286,28 @@ public class ContasPagar implements Serializable {
     }
 
 	public BigDecimal getDesconto() {
-		//this.desconto = this.desconto != null ? this.desconto : BigDecimal.ZERO ;
+		this.desconto = this.desconto != null ? this.desconto : BigDecimal.ZERO ;
 		return desconto;
 	}
 
 	public void setDesconto(BigDecimal desconto) {
 		this.desconto = desconto;
+	}	
+
+	public ClassificacaoDespesa getClassificacaoDespesa() {
+		return classificacaoDespesa;
+	}
+
+	public void setClassificacaoDespesa(ClassificacaoDespesa classificacaoDespesa) {
+		this.classificacaoDespesa = classificacaoDespesa;
+	}
+
+	public SubClassificacaoDespesa getSubClassificacaoDespesa() {
+		return subClassificacaoDespesa;
+	}
+
+	public void setSubClassificacaoDespesa(SubClassificacaoDespesa subClassificacaoDespesa) {
+		this.subClassificacaoDespesa = subClassificacaoDespesa;
 	}
 
 	@Override

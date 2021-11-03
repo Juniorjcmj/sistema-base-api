@@ -65,20 +65,26 @@ public class ContasPagarService {
 	          contaDTO.setNd(contaDTO.getNd().isEmpty() ? numeroDocumento() : contaDTO.getNd());
 	          
 	          List<ContasPagar> contasSalvas = new ArrayList<>();
-	          
-	          if(qontosVouInserir == 1) {
-	        	  ContasPagar c  = find(contaDTO.getId()); 
+	         
+	          // este if é usando para quando for alterar 
+	          if(qontosVouInserir == 1 && contaDTO.getId() != null ) {
+	        	  ContasPagar c  = find(contaDTO.getId()); 	        	 
                   contasSalvas.add(insert(extractedInsert(contaDTO, 1, c)));
+                  return contasSalvas;
+              //este else if é usado para quando for inserir um novo 
+	          }else if (contaDTO.getNumeroParcelas() == 1){	        	  
+	        	  ContasPagar c = new ContasPagar(); 
+	        	  contasSalvas.add(insert(extractedInsert(contaDTO, 1, c)));
+	        	  return contasSalvas;
 	          }else {
+	        	 
 	        	   for(int i = 0; i < qontosVouInserir -1; i ++){
 	            	  ContasPagar c = new ContasPagar(); 
-	                   contasSalvas.add(insert(extractedInsert(contaDTO, i+1, c)));
-	                 
+	                   contasSalvas.add(insert(extractedInsert(contaDTO, i+1, c)));	                  
 	                }
-	          }
-	          
-	             
-	          return contasSalvas;
+	        	   return contasSalvas;
+	          }   
+	            
 	      }
 	       
 	       private ContasPagar extractedInsert(ContasPagarDTO conta, int i, ContasPagar c) {
@@ -89,14 +95,18 @@ public class ContasPagarService {
 	    	   Empresa e = empresaService.findById(conta.getEmpresa());
 	    	   
 	           c.setEmpresa(e);
-	           System.out.println(c.toString());
+	           
 	           c.setDataPagamento(conta.getDataPagamento());
-	           c.setFornecedor(conta.getFornecedor());       
+	           c.setFornecedor(conta.getFornecedor());
+	          
 	           c.setValorDuplicata(conta.getNumeroParcelas() > 1 && conta.getId() == null ? conta.getValorDuplicata().divide(new BigDecimal(conta.getNumeroParcelas()),3, RoundingMode.CEILING) : conta.getValorDuplicata());       
 	           
 	           c.setFormaPagamento(FormaPagamento.toEnum(conta.getFormaPagamento()));
 	           
+	           
 	           c.setDesconto(conta.getNumeroParcelas() > 1 && conta.getId() == null ? conta.getDesconto().divide(new BigDecimal(conta.getNumeroParcelas()),3, RoundingMode.CEILING) : conta.getDesconto()); 
+	           
+	           
 	           c.setJurosMulta(conta.getNumeroParcelas() > 1 && conta.getId() == null ? conta.getJurosMulta().divide(new BigDecimal(conta.getNumeroParcelas()),3, RoundingMode.CEILING) : conta.getJurosMulta()); 
 	           c.setNd(conta.getNd());
 	           c.setLocalPagamento(conta.getLocalPagamento());
