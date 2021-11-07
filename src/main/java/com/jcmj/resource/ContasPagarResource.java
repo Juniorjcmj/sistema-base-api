@@ -2,7 +2,6 @@ package com.jcmj.resource;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -52,7 +51,7 @@ public class ContasPagarResource {
 	@GetMapping
 	public ResponseEntity<List<ContasPagar>> findAll(){		
 		List<ContasPagar> list = service.findAll();
-		List<ContasPagarDTO> result = list.stream().map(obj -> new ContasPagarDTO(obj)).collect(Collectors.toList());
+		//List<ContasPagarDTO> result = list.stream().map(obj -> new ContasPagarDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(list);
 	}
 	

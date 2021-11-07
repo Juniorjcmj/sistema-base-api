@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class SubClassificacaoDespesa {
@@ -12,10 +11,7 @@ public class SubClassificacaoDespesa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;	
-	
-	@OneToOne   
-    private ClassificacaoDespesa classificacaoDespesa;
+	private String descricao;		
 	
 	public SubClassificacaoDespesa() {
 		// TODO Auto-generated constructor stub
@@ -40,13 +36,6 @@ public class SubClassificacaoDespesa {
 		this.descricao = descricao;
 	}
 
-	public ClassificacaoDespesa getClassificacaoDespesa() {
-		return classificacaoDespesa;
-	}
-
-	public void setClassificacaoDespesa(ClassificacaoDespesa classificacaoDespesa) {
-		this.classificacaoDespesa = classificacaoDespesa;
-	}
 	
 	
 	

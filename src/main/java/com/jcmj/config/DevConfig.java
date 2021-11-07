@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import com.jcmj.service.DBService;
 
 @Configuration
-@Profile("dev")
+@Profile("postgree")
 public class DevConfig {
 	
 	@Autowired

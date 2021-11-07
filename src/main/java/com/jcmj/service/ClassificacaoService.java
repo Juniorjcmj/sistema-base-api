@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.jcmj.domain.ClassificacaoDespesa;
 import com.jcmj.repository.ClassificacaoDespesaRepository;
 import com.jcmj.repository.ContasPagarRepository;
-import com.jcmj.repository.SubClassificacaoDespesaRepository;
 import com.jcmj.service.exception.DataIntegrityViolationException;
 import com.jcmj.service.exception.ObjectnotFoundException;
 
@@ -20,9 +19,7 @@ public class ClassificacaoService {
 	
 	@Autowired
 	private ClassificacaoDespesaRepository repo;
-	@Autowired
-	private SubClassificacaoDespesaRepository subRepo;
-	
+		
 	@Autowired
 	private ContasPagarRepository contaRepo;
 	
@@ -42,8 +39,9 @@ public class ClassificacaoService {
 	
 	public ClassificacaoDespesa update(Integer id, @Valid ClassificacaoDespesa objDto) {
 		objDto.setId(id);
-		ClassificacaoDespesa oldObj = findById(id);		
-		return  repo.save(oldObj);
+		ClassificacaoDespesa result = findById(id);	
+		result.setDescricao(objDto.getDescricao());
+		return  repo.save(result);
 	}
 
 	public void delete(Integer id) {		

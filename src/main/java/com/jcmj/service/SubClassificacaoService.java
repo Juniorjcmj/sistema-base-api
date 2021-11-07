@@ -6,18 +6,12 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jcmj.domain.Pessoa;
 import com.jcmj.domain.SubClassificacaoDespesa;
-import com.jcmj.domain.Tecnico;
-import com.jcmj.domain.dto.TecnicoDTO;
-import com.jcmj.repository.ClassificacaoDespesaRepository;
+import com.jcmj.domain.dto.SubClassificacaoDespesaDTO;
 import com.jcmj.repository.ContasPagarRepository;
-import com.jcmj.repository.PessoaRepository;
 import com.jcmj.repository.SubClassificacaoDespesaRepository;
-import com.jcmj.repository.TecnicoRepository;
 import com.jcmj.service.exception.DataIntegrityViolationException;
 import com.jcmj.service.exception.ObjectnotFoundException;
 
@@ -27,12 +21,9 @@ public class SubClassificacaoService {
 	@Autowired
 	private SubClassificacaoDespesaRepository repo;
 	@Autowired
-	private ClassificacaoDespesaRepository classRepo;
-	
+	ClassificacaoService classificacaoService;	
 	@Autowired
-	private ContasPagarRepository contaRepo;
-	
-	
+	private ContasPagarRepository contaRepo;	
 	
 	public SubClassificacaoDespesa findById(Integer id) {
 		Optional<SubClassificacaoDespesa> obj = repo.findById(id);
@@ -43,15 +34,19 @@ public class SubClassificacaoService {
 		return repo.findAll();
 	}
 	
-	public SubClassificacaoDespesa create (SubClassificacaoDespesa objDto) {
+	public SubClassificacaoDespesa create (SubClassificacaoDespesaDTO objDto) {
 		objDto.setId(null);
-		return repo.save(objDto);
+		SubClassificacaoDespesa result = new SubClassificacaoDespesa();
+		
+		result.setDescricao(objDto.getDescricao());
+		return repo.save(result);
 	}
 	
-	public SubClassificacaoDespesa update(Integer id, @Valid SubClassificacaoDespesa objDto) {
+	public SubClassificacaoDespesa update(Integer id, @Valid SubClassificacaoDespesaDTO objDto) {
 		objDto.setId(id);
-		SubClassificacaoDespesa oldObj = findById(id);		
-		return  repo.save(oldObj);
+		SubClassificacaoDespesa result = findById(id);		
+		result.setDescricao(objDto.getDescricao());
+		return repo.save(result);
 	}
 	
 
